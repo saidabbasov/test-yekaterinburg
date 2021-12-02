@@ -1,26 +1,24 @@
-import React, {useEffect} from "react";
+import React from "react";
 import TodoList from "./components/Todo/TodoLits";
 import "./index.css"
 import Context from "./context";
-import Loader from "./components/Loader/Loader";
-import Modal from "./components/Modal/Modal";
 
 const AddTodo = React.lazy( () => import('./components/AddTodo/AddTodo.js'))
 
 const App = () => {
-  const [todos, setTodos] = React.useState([])
+  const [todos, setTodos] = React.useState([
+    {id: 1, completed:false, title: 'Устроиться на стажировку в компанию ООО "Априкод" '},
+    {id: 2, completed:true, title: 'Решить тестовое задание! '},
+    {id: 3, completed:false, title: 'MobX не знаю, но знаю Redux, так что легко будет выучить на стажировке. Главное жедлание'},
+  ])
   const [loading, setLoading] = React.useState(true)
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-         .then(response => response.json())
-         .then(todos => {
-           setTimeout(() => {
-            setTodos(todos)
-            setLoading(false)
-           }, 2000)
-         })
-  }, [])
+  // useEffect(() => {
+  //          setTimeout(() => {
+  //           setTodos(todos)
+  //           setLoading(false)
+  //          }, 2000)
+  // }, [])
 
   const toggleTodo = (id) => {
     setTodos(
@@ -49,11 +47,10 @@ const App = () => {
     <Context.Provider value={{removeTodo}}>
     <div className="wrapper">
       <h1>Расписание на день</h1>
-      <Modal/> 
       <React.Suspense fallback={<p>Loading...</p>}>
          <AddTodo onCreate={addTodo}/> 
       </React.Suspense>
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       {todos.length ? ( 
       <TodoList todos={todos} onToggle={toggleTodo} /> 
       ):(

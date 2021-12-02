@@ -14,9 +14,34 @@ code {
 
 
 .wrapper {
+  max-width: 1200px;
   padding-top: 5rem;
   margin: 0 auto;
-  width: 600px;
+}
+
+@media(max-width:1200px) {
+  .wrapper {
+    max-width: 970px;
+  }
+}
+
+@media(max-width:992) {
+  .wrapper {
+    max-width: 750px;
+  }
+}
+
+@media(max-width:767px) {
+  .wrapper {
+    max-width: none;
+  }
+}
+
+.wrapper h1 {
+  display: flex;
+  justify-content: center;
+  border: 1px solid teal;
+  border-radius: 100px;
 }
 
 .rm {
